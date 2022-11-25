@@ -40,6 +40,14 @@ io.on("connection", (socket) => {
     socket.on("feedbackMessage", (msg) => {
       console.log("🚀 ~ Receiving message from client", msg, socket.id, socket.rooms);
     });
+
+    io.of("/").adapter.on("create-room", (room) => {
+      console.log(`room ${room} was created`);
+    });
+    
+    io.of("/").adapter.on("join-room", (room, id) => {
+      console.log(`socket ${id} has joined room ${room}`);
+    });
 });
 
 app.post('/send-to-client', (req, res) => {
