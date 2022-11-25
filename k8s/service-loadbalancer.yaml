@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: presetserver-service
+spec:
+  selector:
+    app: presetserver
+  type: LoadBalancer
+  ports:
+    - port: 3003
+      targetPort: 3003
+      name: ws
+      protocol: TCP
+    - port: 3004
+      targetPort: 3004
+      name: api
+      protocol: TCP

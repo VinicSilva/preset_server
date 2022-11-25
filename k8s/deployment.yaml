@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: presetserver
+  labels:
+    app: presetserver
+spec:
+  selector:
+    matchLabels:
+      app: presetserver
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: "presetserver"
+    spec:
+      containers:
+        - name: presetserver
+          image: "marcviniper/preset-server:3.1"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 20Mi
+            limits:
+              cpu: 500m
+              memory: 128Mi
+          volumeMounts:
+            - mountPath: "/go/pvc"
+              name: presetserver-volume
+      volumes:
+        - name: presetserver-volume
+          persistentVolumeClaim:
+            claimName: presetserver-pvc

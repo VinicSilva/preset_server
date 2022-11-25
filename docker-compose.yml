@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  ms-preset-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ms-preset-server
+    ports:
+      - '3004:3004'
+      - '3003:3003'
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - ms-preset-cache
+  ms-preset-cache:
+    image: redis
+    container_name: ms-preset-cache
+    ports:
+      - 6379:6379
+    volumes:
+      - ms-redis:/data
+
+volumes:
+  ms-redis:
+    driver: local
+
