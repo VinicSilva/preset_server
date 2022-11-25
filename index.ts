@@ -14,7 +14,7 @@ const io = new Server({
 });
 
 (async () => {
-  const pubClient = createClient({ url: 'rediss://default:7d2124cdb801440b8eeb360a3b7f3c2e@global-stable-bear-30339.upstash.io:30339' });
+  const pubClient = createClient({ url: '' });
   await pubClient.connect();
   const subClient = pubClient.duplicate();
   io.adapter(createAdapter(pubClient, subClient));
