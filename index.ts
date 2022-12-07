@@ -53,7 +53,9 @@ io.on("connection", (socket) => {
 app.post('/send-to-client', (req, res) => {
   const { gasPump, user, cnpj } = req.body
   console.log("🚀  SEND TO THE CLIENT ", { gasPump, user, cnpj })
+
   io.of("/").to(`preset-${cnpj}`).emit("message", { gasPump, user, cnpj, date: new Date().toString() });
+
   res.send('OK')
 });
 
